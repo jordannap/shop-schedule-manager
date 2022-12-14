@@ -29,9 +29,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_14_113630) do
     t.time "half_time"
     t.time "open_after_half_time"
     t.time "closing_time"
-    t.string "day_status"
+    t.string "day_status", default: "woking_day"
+    t.integer "shop_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["shop_id"], name: "index_shop_schedules_on_shop_id"
   end
 
   create_table "shops", force: :cascade do |t|

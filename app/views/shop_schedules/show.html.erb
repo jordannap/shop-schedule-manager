@@ -1,10 +1,54 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @shop_schedule %>
+<div class="container d-flex align-items-center flex-column">
+  <div class="card p-1 shadow w-100">
+  <table class="table table-striped m-0">
+    <thead class="table-dark text-center">
+      <tr>
+        <th colspan="2"><h2><%= t(:schedule) %></h2></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= t(:day) %></td>
+        <td><%= @shop_schedule.day %></td>
+      </tr>
+      <tr>
+        <td><%= t(:opening_time) %></td>
+        <td><%= @shop_schedule.opening_time && @shop_schedule.opening_time.strftime('%H:%M:%S') %></td>
+      </tr>
+      <tr>
+        <td><%= t(:half_time) %></td>
+        <td><%= @shop_schedule.half_time && @shop_schedule.half_time.strftime('%H:%M:%S') %></td>
+      </tr>
+      <tr>
+        <td><%= t(:after_half_time) %></td>
+        <td><%= @shop_schedule.open_after_half_time && @shop_schedule.open_after_half_time.strftime('%H:%M:%S') %></td>
+      </tr>
+      <tr>
+        <td><%= t(:closing_time) %></td>
+        <td><%= @shop_schedule.closing_time && @shop_schedule.closing_time.strftime('%H:%M:%S') %></td>
+      </tr>
+      <tr>
+        <td><%= t(:day_status) %></td>
+        <td><%= @shop_schedule.day_status %></td>
+      </tr>
+      <tr>
+        <td><%= t(:shop) %></td>
+        <td><%= @shop_schedule.shop && @shop_schedule.shop.name %></td>
+      </tr>
 
-<div>
-  <%= link_to "Edit this shop schedule", edit_shop_schedule_path(@shop_schedule) %> |
-  <%= link_to "Back to shop schedules", shop_schedules_path %>
+    </tbody>
+  </table>
+  </div>
 
-  <%= button_to "Destroy this shop schedule", @shop_schedule, method: :delete %>
+
+  <% if admin_signed_in? %>
+    <div class="d-flex mt-3">
+      <%= link_to t(:edit), edit_shop_schedule_path(@shop_schedule), class:"btn btn-warning btn-sm me-2" %>
+      <%= link_to t(:shops), root_path, class:"btn btn-dark btn-sm me-2" %>
+
+      <%= button_to t(:destroy), @shop_schedule, method: :delete, class:"btn btn-danger btn-sm" %>
+    </div>
+  <% end %>
 </div>

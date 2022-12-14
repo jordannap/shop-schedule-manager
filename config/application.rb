@@ -16,6 +16,10 @@ module ShopScheduleManager
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
+
+    I18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
+    I18n.available_locales = %i[en fr]
+    I18n.default_locale = :en
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
   end

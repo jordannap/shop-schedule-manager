@@ -1,33 +1,30 @@
 class ShopSchedulesController < ApplicationController
-  before_action :set_shop_schedule, only: %i[show edit update destroy]
+  before_action :set_shop_schedule, only: %i[ show edit update destroy ]
   before_action :authenticate_admin!, only: %i[update destroy create new]
 
-  # GET /shop_schedules or /shop_schedules.json
   def index
     @shop_schedules = ShopSchedule.all
   end
 
-  # GET /shop_schedules/1 or /shop_schedules/1.json
+
   def show
   end
 
-  # GET /shop_schedules/new
   def new
     @shops = Shop.all
     @shop_schedule = ShopSchedule.new
   end
 
-  # GET /shop_schedules/1/edit
   def edit
+    @shops = Shop.all
   end
 
-  # POST /shop_schedules or /shop_schedules.json
   def create
     @shop_schedule = ShopSchedule.new(shop_schedule_params)
-
+    shop_id = shop_schedule_params[:shop_id]
     respond_to do |format|
       if @shop_schedule.save
-        format.html { redirect_to shop_schedule_url(@shop_schedule), notice: "Shop schedule was successfully created." }
+        format.html { redirect_to shop_path(shop_id), notice: "Shop schedule was successfully created." }
         format.json { render :show, status: :created, location: @shop_schedule }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -36,7 +33,6 @@ class ShopSchedulesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /shop_schedules/1 or /shop_schedules/1.json
   def update
     respond_to do |format|
       if @shop_schedule.update(shop_schedule_params)
@@ -49,7 +45,6 @@ class ShopSchedulesController < ApplicationController
     end
   end
 
-  # DELETE /shop_schedules/1 or /shop_schedules/1.json
   def destroy
     @shop_schedule.destroy
 
@@ -60,13 +55,11 @@ class ShopSchedulesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_shop_schedule
       @shop_schedule = ShopSchedule.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def shop_schedule_params
-      params.require(:shop_schedule).permit(:day, :opening_time, :half_time, :open_after_half_time, :closing_time, :day_status)
+      params.require(:shop_schedule).permit(:day, :opening_time, :half_time, :open_after_half_time, :closing_time, :day_status, :shop_id)
     end
 end
