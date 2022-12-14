@@ -1,5 +1,6 @@
 class ShopsController < ApplicationController
   before_action :set_shop, only: %i[ show edit update destroy ]
+  before_action :authenticate_admin!, only: %i[update destroy create new]
 
   # GET /shops or /shops.json
   def index
@@ -8,6 +9,8 @@ class ShopsController < ApplicationController
 
   # GET /shops/1 or /shops/1.json
   def show
+    @today_schedule = @shop.shop_schedules.find_by(day: Date.today.strftime("%A"))
+    @upcomming_schedules = @shop.shop_schedules.where.not(day: Date.today.strftime("%A"))
   end
 
   # GET /shops/new

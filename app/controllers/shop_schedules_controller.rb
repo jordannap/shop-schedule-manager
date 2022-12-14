@@ -1,5 +1,6 @@
 class ShopSchedulesController < ApplicationController
-  before_action :set_shop_schedule, only: %i[ show edit update destroy ]
+  before_action :set_shop_schedule, only: %i[show edit update destroy]
+  before_action :authenticate_admin!, only: %i[update destroy create new]
 
   # GET /shop_schedules or /shop_schedules.json
   def index
@@ -12,6 +13,7 @@ class ShopSchedulesController < ApplicationController
 
   # GET /shop_schedules/new
   def new
+    @shops = Shop.all
     @shop_schedule = ShopSchedule.new
   end
 
