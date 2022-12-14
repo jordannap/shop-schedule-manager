@@ -1,6 +1,7 @@
 # README
 
 EN FRANCAIS:
+
 Cette application permet de consulter les heures d’ouvertures des magasins.
 En tant que visiteur, je peux voir la liste des magasins avec le statut des horaires de ces magasins (par exemple: jour travaillé ou Fermé).
 En tant que visiteur, en cliquant sur un magasin de la liste, je peux voir les jours avec les horaires d’ouvertures de ce magasin.
