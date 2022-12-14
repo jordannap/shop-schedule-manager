@@ -1,0 +1,47 @@
+<%= form_with(model: shop_schedule) do |form| %>
+  <% if shop_schedule.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(shop_schedule.errors.count, "error") %> prohibited this shop_schedule from being saved:</h2>
+
+      <ul>
+        <% shop_schedule.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :day, style: "display: block" %>
+    <%= form.text_field :day %>
+  </div>
+
+  <div>
+    <%= form.label :opening_time, style: "display: block" %>
+    <%= form.time_field :opening_time %>
+  </div>
+
+  <div>
+    <%= form.label :half_time, style: "display: block" %>
+    <%= form.time_field :half_time %>
+  </div>
+
+  <div>
+    <%= form.label :open_after_half_time, style: "display: block" %>
+    <%= form.time_field :open_after_half_time %>
+  </div>
+
+  <div>
+    <%= form.label :closing_time, style: "display: block" %>
+    <%= form.time_field :closing_time %>
+  </div>
+
+  <div>
+    <%= form.label :day_status, style: "display: block" %>
+    <%= form.text_field :day_status %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
